@@ -18,7 +18,7 @@ const KeywordHelper = () => {
 
     const fetchImagesToTag = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/images');
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/images`);
             // Filter images that have empty keywords
             const untagged = data.filter(img => !img.keywords || img.keywords.length === 0);
             setImages(untagged);
@@ -37,7 +37,7 @@ const KeywordHelper = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            await axios.put(`http://localhost:5000/api/images/${currentImage._id}/keywords`, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/images/${currentImage._id}/keywords`, {
                 keywords: keywords.split(',').map(k => k.trim())
             }, config);
 

@@ -22,10 +22,10 @@ const ImageDetail = () => {
     const fetchImageDetails = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/images/${id}`);
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/images/${id}`);
             setImage(data);
 
-            const allImages = await axios.get('http://localhost:5000/api/images');
+            const allImages = await axios.get(`${import.meta.env.VITE_API_URL}/api/images`);
             const currentTags = (data.tags || []).map(t => t.toLowerCase());
 
             const related = allImages.data.filter(img => {
@@ -48,7 +48,7 @@ const ImageDetail = () => {
             return;
         }
         try {
-            await axios.put(`http://localhost:5000/api/images/${id}/download`);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/images/${id}/download`);
             const response = await fetch(image.imageUrl);
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
