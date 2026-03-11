@@ -68,8 +68,7 @@ const AdminDashboard = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            const { data } = await axios.get(`${apiUrl}/api/auth`, config);
+            const { data } = await axios.get(`${API_BASE_URL}/api/auth`, config);
             setUsers(data);
         } catch (error) {
             toast.error('Failed to fetch users');
@@ -123,8 +122,7 @@ const AdminDashboard = () => {
                         Authorization: `Bearer ${user.token}`,
                     },
                 };
-                const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-                await axios.post(`${apiUrl}/api/images`, formData, config);
+                await axios.post(`${API_BASE_URL}/api/images`, formData, config);
                 successCount++;
             } catch (error) {
                 console.error(`Upload failed for ${selectedFiles[i].name}:`, error);
@@ -157,8 +155,7 @@ const AdminDashboard = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            await axios.delete(`${apiUrl}/api/images/${id}`, config);
+            await axios.delete(`${API_BASE_URL}/api/images/${id}`, config);
             toast.success('Image deleted');
             setImages(images.filter((img) => img._id !== id));
         } catch (error) {
@@ -171,8 +168,7 @@ const AdminDashboard = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            await axios.put(`${apiUrl}/api/images/${id}/keywords`, { keywords: newKeywords }, config);
+            await axios.put(`${API_BASE_URL}/api/images/${id}/keywords`, { keywords: newKeywords }, config);
             toast.success('Keywords updated');
             fetchAdminImages();
         } catch (error) {
@@ -185,8 +181,7 @@ const AdminDashboard = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            await axios.put(`${apiUrl}/api/images/${id}/auto-tag`, {}, config);
+            await axios.put(`${API_BASE_URL}/api/images/${id}/auto-tag`, {}, config);
             toast.success('Image auto-tagged successfully');
             fetchAdminImages();
         } catch (error) {
@@ -202,8 +197,7 @@ const AdminDashboard = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            const { data } = await axios.post(`${apiUrl}/api/images/reindex-keywords`, {}, config);
+            const { data } = await axios.post(`${API_BASE_URL}/api/images/reindex-keywords`, {}, config);
             toast.success(data.message);
             fetchAdminImages();
         } catch (error) {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { Loader2, Save, SkipForward, CheckCircle } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../config';
 
 const KeywordHelper = () => {
     const { user } = useAuth();
@@ -18,8 +18,7 @@ const KeywordHelper = () => {
 
     const fetchImagesToTag = async () => {
         try {
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            const { data } = await axios.get(`${apiUrl}/api/images`);
+            const { data } = await axios.get(`${API_BASE_URL}/api/images`);
             // Filter images that have empty keywords
             const untagged = data.filter(img => !img.keywords || img.keywords.length === 0);
             setImages(untagged);
@@ -38,8 +37,7 @@ const KeywordHelper = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            await axios.put(`${apiUrl}/api/images/${currentImage._id}/keywords`, {
+            await axios.put(`${API_BASE_URL}/api/images/${currentImage._id}/keywords`, {
                 keywords: keywords.split(',').map(k => k.trim())
             }, config);
 

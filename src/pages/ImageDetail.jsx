@@ -49,8 +49,7 @@ const ImageDetail = () => {
             return;
         }
         try {
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            await axios.put(`${apiUrl}/api/images/${id}/download`);
+            await axios.put(`${API_BASE_URL}/api/images/${id}/download`);
             const response = await fetch(image.imageUrl);
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
