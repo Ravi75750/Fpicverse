@@ -1,3 +1,10 @@
+import { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Download, Calendar, User, Tag, ArrowLeft, Loader2, Sparkles, Share2, Heart, Eye, Info } from 'lucide-react';
+import toast from 'react-hot-toast';
+import Loader from '../components/Loader';
+import { useAuth } from '../context/AuthContext';
 import { API_BASE_URL } from '../config';
 
 const ImageDetail = () => {

@@ -1,3 +1,8 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
+import { Upload, Trash2, LayoutGrid, FileText, Tag, Image as ImageIcon, Loader2, Plus, X, Users, Mail, ShieldCheck, ShieldAlert, Search, Wand2, Save } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { API_BASE_URL } from '../config';
 
 const AdminDashboard = () => {
