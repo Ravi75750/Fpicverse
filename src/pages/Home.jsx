@@ -43,7 +43,8 @@ const Home = () => {
                 params.search = finalSearch;
             }
 
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/images`, {
+            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
+            const { data } = await axios.get(`${apiUrl}/api/images`, {
                 params
             });
             setImages(data);

@@ -17,9 +17,16 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
+    const getApiUrl = () => {
+        const url = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        return url.replace(/\/$/, "");
+    };
+
+    const API_URL = getApiUrl();
+
     const login = async (email, password) => {
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password });
+            const { data } = await axios.post(`${API_URL}/api/auth/login`, { email, password });
             if (data.token) {
                 setUser(data);
                 localStorage.setItem('user', JSON.stringify(data));
@@ -32,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     const verifyLoginOTP = async (email, otp) => {
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/verify-login`, { email, otp });
+            const { data } = await axios.post(`${API_URL}/api/auth/verify-login`, { email, otp });
             setUser(data);
             localStorage.setItem('user', JSON.stringify(data));
             return data;
@@ -43,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (name, email, password) => {
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { name, email, password });
+            const { data } = await axios.post(`${API_URL}/api/auth/register`, { name, email, password });
             return data;
         } catch (error) {
             throw error.response?.data?.message || 'Registration failed';
@@ -52,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
     const verifyRegisterOTP = async (email, otp) => {
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/verify-otp`, { email, otp });
+            const { data } = await axios.post(`${API_URL}/api/auth/verify-otp`, { email, otp });
             setUser(data);
             localStorage.setItem('user', JSON.stringify(data));
             return data;
