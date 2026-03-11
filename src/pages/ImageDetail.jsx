@@ -1,10 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Download, Calendar, User, Tag, ArrowLeft, Loader2, Sparkles, Share2, Heart, Eye, Info } from 'lucide-react';
-import toast from 'react-hot-toast';
-import Loader from '../components/Loader';
-import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config';
 
 const ImageDetail = () => {
     const { id } = useParams();
@@ -22,11 +16,10 @@ const ImageDetail = () => {
     const fetchImageDetails = async () => {
         setLoading(true);
         try {
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            const { data } = await axios.get(`${apiUrl}/api/images/${id}`);
+            const { data } = await axios.get(`${API_BASE_URL}/api/images/${id}`);
             setImage(data);
 
-            const allImages = await axios.get(`${apiUrl}/api/images`);
+            const allImages = await axios.get(`${API_BASE_URL}/api/images`);
             const currentTags = (data.tags || []).map(t => t.toLowerCase());
 
             const related = allImages.data.filter(img => {

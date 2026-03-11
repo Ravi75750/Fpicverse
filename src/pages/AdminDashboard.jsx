@@ -1,8 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useAuth } from '../context/AuthContext';
-import { Upload, Trash2, LayoutGrid, FileText, Tag, Image as ImageIcon, Loader2, Plus, X, Users, Mail, ShieldCheck, ShieldAlert, Search, Wand2, Save } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../config';
 
 const AdminDashboard = () => {
     const { user } = useAuth();
@@ -52,8 +48,7 @@ const AdminDashboard = () => {
             if (adminSearch) params.search = adminSearch;
             if (adminColor !== 'All') params.color = adminColor;
 
-            const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, "");
-            const { data } = await axios.get(`${apiUrl}/api/images`, { params });
+            const { data } = await axios.get(`${API_BASE_URL}/api/images`, { params });
             setImages(data);
         } catch (error) {
             toast.error('Failed to fetch images');
