@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Download, ExternalLink, Loader, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import HomeIcon from '../components/homeicon';
 import { API_BASE_URL } from '../config';
 
 const Home = () => {
