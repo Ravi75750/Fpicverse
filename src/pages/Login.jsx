@@ -23,7 +23,8 @@ const Login = () => {
 
         setLoading(true);
         try {
-            const data = await login(email, password);
+            const normalizedEmail = email.toLowerCase().trim();
+            const data = await login(normalizedEmail, password);
             if (data.token) {
                 toast.success('Logged in successfully');
                 navigate(data.role === 'admin' ? '/admin' : '/');

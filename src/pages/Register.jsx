@@ -31,7 +31,8 @@ const Register = () => {
 
         setLoading(true);
         try {
-            await register(name, email, password);
+            const normalizedEmail = email.toLowerCase().trim();
+            await register(name, normalizedEmail, password);
             toast.success('Verification OTP sent to your email');
             navigate('/verify-otp', { state: { email, type: 'register' } });
         } catch (error) {
