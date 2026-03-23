@@ -4,8 +4,6 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Register from './pages/Register';
-import VerifyOTP from './pages/VerifyOTP';
 import AdminDashboard from './pages/AdminDashboard';
 import ImageDetail from './pages/ImageDetail';
 import KeywordHelper from './pages/KeywordHelper';
@@ -33,8 +31,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/verify-otp" element={<VerifyOTP />} />
               <Route path="/image/:id" element={<ImageDetail />} />
               <Route
                 path="/admin"

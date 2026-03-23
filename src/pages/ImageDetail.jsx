@@ -43,11 +43,6 @@ const ImageDetail = () => {
     };
 
     const handleDownload = async () => {
-        if (!user) {
-            toast.error('Please login to download');
-            navigate('/login');
-            return;
-        }
         try {
             await axios.put(`${API_BASE_URL}/api/images/${id}/download`);
             const response = await fetch(image.imageUrl);

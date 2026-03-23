@@ -27,10 +27,7 @@ const Login = () => {
             const data = await login(normalizedEmail, password);
             if (data.token) {
                 toast.success('Logged in successfully');
-                navigate(data.role === 'admin' ? '/admin' : '/');
-            } else {
-                toast.success('OTP sent to your email');
-                navigate('/verify-otp', { state: { email, type: 'login' } });
+                navigate('/admin');
             }
         } catch (error) {
             toast.error(error);
@@ -113,12 +110,7 @@ const Login = () => {
                     </button>
                 </form>
 
-                <div className="mt-8 text-center text-sm text-gray-500">
-                    Don't have an account?{' '}
-                    <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-500 transition-colors">
-                        Register now
-                    </Link>
-                </div>
+
             </div>
         </div>
     );
