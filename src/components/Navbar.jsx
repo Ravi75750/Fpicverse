@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogOut, User, Image as ImageIcon, PlusSquare } from 'lucide-react';
 
+
 const Navbar = () => {
     const { user, logout } = useAuth();
 
@@ -11,9 +12,7 @@ const Navbar = () => {
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center space-x-2">
-                            <div className="bg-blue-600 p-1.5 rounded-lg">
-                                <ImageIcon className="h-5 w-5 text-white" />
-                            </div>
+                            <img src="/logo.png" alt="PicVerse Logo" className="h-14 w-auto" />
                             <span className="text-[30px] font-bold bg-linear-to-r from-[#52b176] to-[#1e097e] bg-clip-text text-transparent">
                                 PicVerse
                             </span>

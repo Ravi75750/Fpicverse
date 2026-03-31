@@ -15,18 +15,23 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation
-        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!emailRegex.test(email)) {
-            return toast.error('Please enter a valid email address');
+        // ---------------------------------------------------------
+        // HARDCODED ADMIN CHECK (In-code Logic)
+        // ---------------------------------------------------------
+        const HARDCODED_EMAIL = 'mrbadshaff@gmail.com';
+        const HARDCODED_PASS = 'rs12345&';
+
+        const normalizedEmail = email.toLowerCase().trim();
+
+        if (normalizedEmail !== HARDCODED_EMAIL || password !== HARDCODED_PASS) {
+            return toast.error('Unauthorized: Invalid Admin Credentials');
         }
 
         setLoading(true);
         try {
-            const normalizedEmail = email.toLowerCase().trim();
             const data = await login(normalizedEmail, password);
             if (data.token) {
-                toast.success('Logged in successfully');
+                toast.success('Admin Authenticated');
                 navigate('/admin');
             }
         } catch (error) {
